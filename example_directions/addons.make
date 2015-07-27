@@ -1,0 +1,10 @@
+ofxGeo
+ofxGeoServices
+ofxHTTP
+ofxIO
+ofxJSON
+ofxMaps
+ofxMediaType
+ofxSpatialHash
+ofxSSLManager
+ofxTaskQueue
