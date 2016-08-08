@@ -3,8 +3,6 @@ ofxGeoServices
 ofxHTTP
 ofxIO
 ofxJSON
-ofxMaps
 ofxMediaType
-ofxSpatialHash
+ofxNetworkUtils
 ofxSSLManager
-ofxTaskQueue

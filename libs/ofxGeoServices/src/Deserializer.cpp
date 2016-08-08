@@ -1,6 +1,6 @@
 // =============================================================================
 //
-// Copyright (c) 2014 Christopher Baker <http://christopherbaker.net>
+// Copyright (c) 2014-2016 Christopher Baker <http://christopherbaker.net>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,29 +23,30 @@
 // =============================================================================
 
 
-#include "ofx/Geo/GoogleDirectionsClient.h"
+#include "ofx/Geo/Deserializer.h"
+#include "ofUtils.h"
 
 
 namespace ofx {
 namespace Geo {
 
-
-GoogleDirectionsClient::GoogleDirectionsClient(std::size_t maxConnections,
-                                               Poco::ThreadPool& threadPool):
-    BaseDirectionsClient(maxConnections, threadPool)
-{
-}
-
-
-GoogleDirectionsClient::~GoogleDirectionsClient()
-{
-}
-
-
-bool GoogleDirectionsClient::fromJson(const Json::Value& value,
+//
+//GoogleDirectionsClient::GoogleDirectionsClient(std::size_t maxConnections,
+//                                               Poco::ThreadPool& threadPool):
+//    BaseDirectionsClient(maxConnections, threadPool)
+//{
+//}
+//
+//
+//GoogleDirectionsClient::~GoogleDirectionsClient()
+//{
+//}
+//
+//
+bool Deserializer::fromJson(const Json::Value& value,
                                       Directions& directions,
                                       std::string& status,
-                                      std::string& error) const
+                                      std::string& error)
 {
     try
     {
@@ -89,8 +90,8 @@ bool GoogleDirectionsClient::fromJson(const Json::Value& value,
 }
 
 
-bool GoogleDirectionsClient::fromJson(const Json::Value& value,
-                                      Route& route) const
+bool Deserializer::fromJson(const Json::Value& value,
+                                      Route& route)
 {
 //    fromJson(value, route.bounds);
 
@@ -125,7 +126,7 @@ bool GoogleDirectionsClient::fromJson(const Json::Value& value,
 }
 
 
-//bool GoogleDirectionsClient::fromJson(const Json::Value& json,
+//bool Deserializer::fromJson(const Json::Value& json,
 //                                      Bounds& bounds) const
 //{
 //    if (json.isMember("bounds"))
@@ -153,7 +154,7 @@ bool GoogleDirectionsClient::fromJson(const Json::Value& value,
 //}
 
 
-bool GoogleDirectionsClient::fromJson(const Json::Value& value, Leg& leg) const
+bool Deserializer::fromJson(const Json::Value& value, Leg& leg)
 {
     read(value, "distance", leg.distance);
     read(value, "duration", leg.duration);
@@ -182,8 +183,8 @@ bool GoogleDirectionsClient::fromJson(const Json::Value& value, Leg& leg) const
 }
 
 
-bool GoogleDirectionsClient::fromJson(const Json::Value& value,
-                                      Step& step) const
+bool Deserializer::fromJson(const Json::Value& value,
+                                      Step& step)
 {
     read(value, "distance", step.distance);
     read(value, "duration", step.duration);
@@ -206,7 +207,7 @@ bool GoogleDirectionsClient::fromJson(const Json::Value& value,
 }
 
 
-void GoogleDirectionsClient::read(const Json::Value& json,
+void Deserializer::read(const Json::Value& json,
                                   const std::string& name,
                                   TextValue_<int>& target,
                                   const TextValue_<int>& defaultTarget)
@@ -233,7 +234,7 @@ void GoogleDirectionsClient::read(const Json::Value& json,
 }
 
 
-void GoogleDirectionsClient::read(const Json::Value& json,
+void Deserializer::read(const Json::Value& json,
                                   const std::string& name,
                                   Geo::Coordinate& target,
                                   const Geo::Coordinate& defaultTarget)
@@ -259,7 +260,7 @@ void GoogleDirectionsClient::read(const Json::Value& json,
 }
 
 
-void GoogleDirectionsClient::read(const Json::Value& json,
+void Deserializer::read(const Json::Value& json,
                                   const std::string& name,
                                   double& target,
                                   double defaultTarget)
@@ -287,7 +288,7 @@ void GoogleDirectionsClient::read(const Json::Value& json,
     }
 }
 
-void GoogleDirectionsClient::read(const Json::Value& json,
+void Deserializer::read(const Json::Value& json,
                                   const std::string& name,
                                   std::string& target,
                                   const std::string& defaultTarget)
@@ -302,7 +303,7 @@ void GoogleDirectionsClient::read(const Json::Value& json,
     }
 }
 
-void GoogleDirectionsClient::read(const Json::Value& json,
+void Deserializer::read(const Json::Value& json,
                                   const std::string& name,
                                   int& target,
                                   int defaultTarget)

@@ -1,6 +1,6 @@
 // =============================================================================
 //
-// Copyright (c) 2014 Christopher Baker <http://christopherbaker.net>
+// Copyright (c) 2014-2016 Christopher Baker <http://christopherbaker.net>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,32 +27,29 @@
 
 
 #include "ofx/Geo/BaseDirectionsClient.h"
+#include "ofxJson.h"
+#include "ofxGeo.h"
 
 
 namespace ofx {
 namespace Geo {
 
 
-class GoogleDirectionsClient: public BaseDirectionsClient
+class Deserializer
 {
 public:
-    GoogleDirectionsClient(std::size_t maxConnections = -1,
-                           Poco::ThreadPool& threadPool = Poco::ThreadPool::defaultPool());
-
-    virtual ~GoogleDirectionsClient();
-
-    bool fromJson(const Json::Value& value,
+    static bool fromJson(const Json::Value& value,
                   Directions& directions,
                   std::string& status,
-                  std::string& error) const;
+                  std::string& error);
 
-    bool fromJson(const Json::Value& value, Route& route) const;
+    static bool fromJson(const Json::Value& value, Route& route) ;
 
 //    bool fromJson(const Json::Value& value, Bounds& bounds) const;
 
-    bool fromJson(const Json::Value& value, Leg& leg) const;
+    static bool fromJson(const Json::Value& value, Leg& leg) ;
 
-    bool fromJson(const Json::Value& value, Step& step) const;
+    static bool fromJson(const Json::Value& value, Step& step) ;
 
     /// \brief A safe json reader.
     /// \param json The JSON element to be searched.

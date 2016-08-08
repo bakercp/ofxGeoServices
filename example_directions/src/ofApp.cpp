@@ -1,6 +1,6 @@
 // =============================================================================
 //
-// Copyright (c) 2014 Christopher Baker <http://christopherbaker.net>
+// Copyright (c) 2014-2016 Christopher Baker <http://christopherbaker.net>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,19 +28,63 @@
 
 void ofApp::setup()
 {
-    client.registerClientEvents(this);
+//    client.registerClientEvents(this);
 
-    ofx::Geo::Coordinate origin(38.6276,-90.1992); // Saint Louis, Missouri, USA
-    ofx::Geo::Coordinate destination(41.8819, -87.6278); // Chicago, Illinois, USA
+    ofxGeo::Coordinate origin(38.6276, -90.1992); // Saint Louis, Missouri, USA
+    ofxGeo::Coordinate destination(41.8819, -87.6278); // Chicago, Illinois, USA
 
 //    std::string origin("Saint Louis, Missouri"); // Saint Louis, Missouri, USA
 //    std::string destination("Chicago, Illinois"); // Chicago, Illinois, USA
 
-    ofx::Geo::GoogleDirectionsQuery query(origin, destination);
+    ofxGeo::GoogleDirectionsQuery query(origin, destination);
 
     std::cout << query.toString() << std::endl;
 
-    client.getDirections(query);
+
+    ofBuffer buffer = ofBufferFromFile("directions.json");
+
+    Json::Reader reader;
+    Json::Value value;
+
+    if (reader.parse(buffer, value))
+    {
+        ofxGeo::Directions directions;
+
+        std::string status;
+        std::string error;
+
+        if (ofxGeo::Deserializer::fromJson(value, directions, status, error))
+        {
+            for (const auto& route: directions.routes)
+            {
+                std::cout << "Route: " << route.summary << std::endl;
+
+                for (const auto& leg: route.legs)
+                {
+                    std::cout << "\tLeg: " << leg.startAddress << "->" << leg.endAddress << std::endl;
+        
+                    for (const auto& step: leg.steps)
+                    {
+                        std::cout << "\t\tStep: " << step.start << "->" << step.end << std::endl;
+
+                        for (const auto& point: step.polyline)
+                        {
+                            std::cout << "\t\t\t" << point << std::endl;
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            std::cout << "1. fail." << std::endl;
+        }
+    }
+    else {
+        std::cout << "2. fail." << std::endl;
+    }
+
+
+//    client.getDirections(query);
 
 }
 
@@ -49,63 +93,4 @@ void ofApp::draw()
 {
     ofBackground(0);
     
-}
-
-
-bool ofApp::onGeoDirectionsEvent(ofx::Geo::DirectionsEventArgs& args)
-{
-    const std::vector<ofx::Geo::Route>& routes = args.getDirections().routes;
-
-    std::vector<ofx::Geo::Route>::const_iterator routeIter = routes.begin();
-
-    while (routeIter != routes.end())
-    {
-        const ofx::Geo::Route& route = *routeIter;
-
-        std::cout << "Route: " << route.summary << std::endl;
-
-        std::vector<ofx::Geo::Leg>::const_iterator legsIter = route.legs.begin();
-
-        while (legsIter != route.legs.end())
-        {
-            const ofx::Geo::Leg& leg = *legsIter;
-
-            std::cout << "\tLeg: " << leg.startAddress << "->" << leg.endAddress << std::endl;
-
-            std::vector<ofx::Geo::Step>::const_iterator stepsIter = leg.steps.begin();
-
-            while (stepsIter != leg.steps.end())
-            {
-                const ofx::Geo::Step& step = *stepsIter;
-
-                std::cout << "\t\tStep: " << step.start << "->" << step.end << std::endl;
-
-                std::vector<ofx::Geo::Coordinate>::const_iterator pointIter = step.polyline.begin();
-
-                while (pointIter != step.polyline.end())
-                {
-                    const ofx::Geo::Coordinate& point = *pointIter;
-
-                    std::cout << "\t\t\t" << point << std::endl;
-
-                    ++pointIter;
-                }
-
-                ++stepsIter;
-            }
-
-            ++legsIter;
-        }
-
-        ++routeIter;
-    }
-
-    return true;
-}
-
-
-bool ofApp::onGeoDirectionsErrorEvent(ofx::Geo::DirectionsErrorEventArgs& args)
-{
-    cout << "ERROR GOT DIRECTIONS: " << args.getException().displayText() << endl;
-    return true;
 }

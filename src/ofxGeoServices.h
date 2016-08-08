@@ -1,6 +1,6 @@
 // =============================================================================
 //
-// Copyright (c) 2014 Christopher Baker <http://christopherbaker.net>
+// Copyright (c) 2014-2016 Christopher Baker <http://christopherbaker.net>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,13 +23,16 @@
 // =============================================================================
 
 
+#pragma once
+
+
+#include "ofxHTTP.h"
+#include "ofxJson.h"
 #include "ofxGeo.h"
-
 #include "ofx/Geo/Directions.h"
+#include "ofx/Geo/Deserializer.h"
 #include "ofx/Geo/Geocoder.h"
-
 #include "ofx/Geo/BaseDirectionsQuery.h"
 #include "ofx/Geo/BaseDirectionsClient.h"
-
 #include "ofx/Geo/GoogleDirectionsQuery.h"
 #include "ofx/Geo/GoogleDirectionsClient.h"
