@@ -26,7 +26,7 @@
 #pragma once
 
 
-#include "ofx/Geo/BaseDirectionsClient.h"
+#include "ofx/Geo/Directions.h"
 #include "ofxJson.h"
 #include "ofxGeo.h"
 
