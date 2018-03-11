@@ -26,9 +26,9 @@ namespace Geo {
 //
 //
 bool Deserializer::fromJson(const Json::Value& value,
-                                      Directions& directions,
-                                      std::string& status,
-                                      std::string& error)
+                            Directions& directions,
+                            std::string& status,
+                            std::string& error)
 {
     try
     {
@@ -72,8 +72,7 @@ bool Deserializer::fromJson(const Json::Value& value,
 }
 
 
-bool Deserializer::fromJson(const Json::Value& value,
-                                      Route& route)
+bool Deserializer::fromJson(const Json::Value& value, Route& route)
 {
 //    fromJson(value, route.bounds);
 
@@ -190,9 +189,9 @@ bool Deserializer::fromJson(const Json::Value& value,
 
 
 void Deserializer::read(const Json::Value& json,
-                                  const std::string& name,
-                                  TextValue_<int>& target,
-                                  const TextValue_<int>& defaultTarget)
+                        const std::string& name,
+                        TextValue_<int>& target,
+                        const TextValue_<int>& defaultTarget)
 {
     if (json.isMember(name))
     {
@@ -217,9 +216,9 @@ void Deserializer::read(const Json::Value& json,
 
 
 void Deserializer::read(const Json::Value& json,
-                                  const std::string& name,
-                                  Geo::Coordinate& target,
-                                  const Geo::Coordinate& defaultTarget)
+                        const std::string& name,
+                        Geo::Coordinate& target,
+                        const Geo::Coordinate& defaultTarget)
 {
     if (json.isMember(name))
     {
@@ -271,9 +270,9 @@ void Deserializer::read(const Json::Value& json,
 }
 
 void Deserializer::read(const Json::Value& json,
-                                  const std::string& name,
-                                  std::string& target,
-                                  const std::string& defaultTarget)
+                        const std::string& name,
+                        std::string& target,
+                        const std::string& defaultTarget)
 {
     if (json.isMember(name) && json[name].isString())
     {
@@ -286,9 +285,9 @@ void Deserializer::read(const Json::Value& json,
 }
 
 void Deserializer::read(const Json::Value& json,
-                                  const std::string& name,
-                                  int& target,
-                                  int defaultTarget)
+                        const std::string& name,
+                        int& target,
+                        int defaultTarget)
 {
     if (json.isMember(name))
     {
