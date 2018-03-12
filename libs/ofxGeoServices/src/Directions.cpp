@@ -12,5 +12,4 @@ namespace ofx {
 namespace Geo {
 
 
-
 } } // namespace ofx::Geo

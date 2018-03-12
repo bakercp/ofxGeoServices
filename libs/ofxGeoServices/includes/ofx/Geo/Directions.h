@@ -118,7 +118,7 @@ class Directions
 {
 public:
     std::vector<Route> routes;
-    
+
 };
 
 

@@ -57,7 +57,7 @@ public:
     static const std::string KEY_SIGNATURE;
 
     static const Poco::URI GOOGLE_DIRECTIONS_BASE_URI;
-    
+
 };
 
 
