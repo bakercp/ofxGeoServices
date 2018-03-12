@@ -9,8 +9,8 @@
 
 
 #include "ofx/Geo/Directions.h"
-#include "ofxJson.h"
 #include "ofxGeo.h"
+#include "ofxJson.h"
 
 
 namespace ofx {
@@ -21,9 +21,9 @@ class Deserializer
 {
 public:
     static bool fromJson(const Json::Value& value,
-                  Directions& directions,
-                  std::string& status,
-                  std::string& error);
+                         Directions& directions,
+                         std::string& status,
+                         std::string& error);
 
     static bool fromJson(const Json::Value& value, Route& route) ;
 

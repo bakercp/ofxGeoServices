@@ -22,7 +22,6 @@ void ofApp::setup()
 
     std::cout << query.toString() << std::endl;
 
-
     ofBuffer buffer = ofBufferFromFile("directions.json");
 
     Json::Reader reader;
@@ -57,11 +56,13 @@ void ofApp::setup()
                 }
             }
         }
-        else {
+        else
+        {
             std::cout << "1. fail." << std::endl;
         }
     }
-    else {
+    else
+    {
         std::cout << "2. fail." << std::endl;
     }
 
