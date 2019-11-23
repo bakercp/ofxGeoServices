@@ -21,9 +21,10 @@ const std::string GoogleDirectionsQuery::KEY_OPTIMIZE = "optimize";
 const std::string GoogleDirectionsQuery::KEY_SENSOR = "sensor";
 const std::string GoogleDirectionsQuery::KEY_CLIENT = "client";
 const std::string GoogleDirectionsQuery::KEY_SIGNATURE = "signature";
+const std::string GoogleDirectionsQuery::KEY_CREDENTIALS = "key";
 
 
-const Poco::URI GoogleDirectionsQuery::GOOGLE_DIRECTIONS_BASE_URI = Poco::URI("http://maps.googleapis.com/maps/api/directions/json");
+const Poco::URI GoogleDirectionsQuery::GOOGLE_DIRECTIONS_BASE_URI = Poco::URI("https://maps.googleapis.com/maps/api/directions/json");
 
 
 GoogleDirectionsQuery::GoogleDirectionsQuery(const std::string& origin,
@@ -136,6 +137,12 @@ void GoogleDirectionsQuery::setClient(const std::string& client)
 void GoogleDirectionsQuery::setSignature(const std::string& signature)
 {
     Poco::Net::NameValueCollection::set(KEY_SIGNATURE, signature);
+}
+
+
+void GoogleDirectionsQuery::setCredentials(const std::string& credentials)
+{
+    Poco::Net::NameValueCollection::set(KEY_CREDENTIALS, credentials);
 }
 
 

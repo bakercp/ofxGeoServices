@@ -46,6 +46,8 @@ public:
     void setClient(const std::string& client);
     void setSignature(const std::string& signature);
 
+    void setCredentials(const std::string& credentials);
+
     static const std::string KEY_MODE;
     static const std::string KEY_LANGUAGE;
     static const std::string KEY_UNITS;
@@ -55,6 +57,7 @@ public:
     static const std::string KEY_SENSOR;
     static const std::string KEY_CLIENT;
     static const std::string KEY_SIGNATURE;
+    static const std::string KEY_CREDENTIALS;
 
     static const Poco::URI GOOGLE_DIRECTIONS_BASE_URI;
 

@@ -19,6 +19,8 @@ void ofApp::setup()
 //    std::string destination("Chicago, Illinois"); // Chicago, Illinois, USA
 
     ofxGeo::GoogleDirectionsQuery query(origin, destination);
+    // Get credentials https://cloud.google.com/maps-platform/user-guide/account-changes/
+    query.setCredentials("...");
 
     std::cout << query.toString() << std::endl;
 
